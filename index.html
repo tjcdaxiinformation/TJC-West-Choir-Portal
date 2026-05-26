@@ -97,21 +97,24 @@
 
     </main>
 
-    <!-- 頁尾宣告 -->
-<footer class="bg-slate-900 text-slate-500 text-[10px] text-center py-4 border-t border-slate-800 shrink-0 flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-3">
-    <span>TJC Western District Centennial Music Concert PR Group © 2026. All Rights Reserved.</span>
-    <span class="hidden sm:inline text-slate-700">|</span>
-    <a href="https://line.me/ti/p/U3XGjc8GKN" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-black underline flex items-center gap-1 transition-colors">
-        💬 任何問題請聯絡公關宣傳組長
-    </a>
-</footer>
+    <!-- 頁尾宣告與組長聯繫方式 -->
+    <footer class="bg-slate-900 text-slate-500 text-[10px] text-center py-4 border-t border-slate-800 shrink-0 flex flex-col sm:flex-row justify-center items-center gap-1 sm:gap-3">
+        <span>TJC Western District Centennial Music Concert PR Group © 2026. All Rights Reserved.</span>
+        <span class="hidden sm:inline text-slate-700">|</span>
+        <a href="https://line.me/ti/p/U3XGjc8GKN" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-black underline flex items-center gap-1 transition-colors">
+            💬 任何問題請聯絡公關宣傳組長
+        </a>
+    </footer>
 
     <!-- JavaScript 核心控制 -->
     <script>
         // 雲端硬碟主資料夾ID (備用)
         const mainDriveFolder = "16u1TIeRSwUBAQNIKQIAw3FKt0P6QiWja";
 
-        // 16大詩班完整數據庫 - 【請直接在此貼上各詩班的個別資料夾網址】
+        // 各詩班基本資料下載與填寫的統一雲端硬碟連結
+        const choirInfoFormUrl = "https://drive.google.com/drive/folders/1clXLMuRrvif3D6AoPlIug-n3p1_EeUf3?usp=sharing";
+
+        // 16大詩班完整數據庫 - 【已置入您提供的最新真實雲端硬碟路徑】
         const choirs = [
             { 
                 id: 1, 
@@ -123,7 +126,7 @@
                 conductor: "王鴻志", 
                 pianist: "陳 箴 / 孔思恩", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/15m2Jkaiq9724uE2TdgFD_ft-wVnMF_Cn?usp=sharing" // 1.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/15m2Jkaiq9724uE2TdgFD_ft-wVnMF_Cn?usp=sharing"
             },
             { 
                 id: 2, 
@@ -135,7 +138,7 @@
                 conductor: "胡燕琳", 
                 pianist: "陳齊揚", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1jCTUDvbH4ni0nooed0vmQMzYfele23HG?usp=sharing" // 2.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1jCTUDvbH4ni0nooed0vmQMzYfele23HG?usp=sharing"
             },
             { 
                 id: 3, 
@@ -147,7 +150,7 @@
                 conductor: "田恩惠", 
                 pianist: "林月霞", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1fCrnnbYGg_fmyPatoKeA1N2jkgrliq__?usp=sharing" // 3.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1fCrnnbYGg_fmyPatoKeA1N2jkgrliq__?usp=sharing"
             },
             { 
                 id: 4, 
@@ -159,7 +162,7 @@
                 conductor: "徐慈敏", 
                 pianist: "徐 臻", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1dPdl-hkTDLwt36So7p4uQiq9CrSHQD01?usp=sharing" // 4.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1dPdl-hkTDLwt36So7p4uQiq9CrSHQD01?usp=sharing"
             },
             { 
                 id: 5, 
@@ -171,7 +174,7 @@
                 conductor: "未提供", 
                 pianist: "未提供", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1g283rlqGyODPX7wagWGt9ABzuI9yZJAd?usp=sharing" // 5.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1g283rlqGyODPX7wagWGt9ABzuI9yZJAd?usp=sharing"
             },
             { 
                 id: 6, 
@@ -183,7 +186,7 @@
                 conductor: "黃欣茹", 
                 pianist: "張立揚", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1absu_8j9LC19Tbkhw_iD2IsuQSE7nvXk?usp=sharing" // 6.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1absu_8j9LC19Tbkhw_iD2IsuQSE7nvXk?usp=sharing"
             },
             { 
                 id: 7, 
@@ -195,7 +198,7 @@
                 conductor: "未提供", 
                 pianist: "未提供", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1p3suQAVCvnGukWB7Lk91wOEJWt0Ow6F_?usp=sharing" // 7.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1p3suQAVCvnGukWB7Lk91wOEJWt0Ow6F_?usp=sharing"
             },
             { 
                 id: 8, 
@@ -207,7 +210,7 @@
                 conductor: "胡致念", 
                 pianist: "張紫芸", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1qrjiUVHrsSLmS0rhr8snFXffsYK5oHMI?usp=sharing" // 8.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1qrjiUVHrsSLmS0rhr8snFXffsYK5oHMI?usp=sharing"
             },
             { 
                 id: 9, 
@@ -219,7 +222,7 @@
                 conductor: "未提供", 
                 pianist: "未提供", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/15JmvAn2lvvi4kxg_GmUQ0fkp5Ak-JsTL?usp=sharing" // 9.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/15JmvAn2lvvi4kxg_GmUQ0fkp5Ak-JsTL?usp=sharing"
             },
             { 
                 id: 10, 
@@ -231,7 +234,7 @@
                 conductor: "李子寧", 
                 pianist: "湯亞昕 / 孫榮恩", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1IyVekl7BYFCHCMLG0qqanQyxKrMJSzNd?usp=sharing" // 10.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1IyVekl7BYFCHCMLG0qqanQyxKrMJSzNd?usp=sharing"
             },
             { 
                 id: 11, 
@@ -243,7 +246,7 @@
                 conductor: "田珍寶", 
                 pianist: "何燕萍", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1qwPT0rRnS1AW42MtMU-TtBkfQZd-Vzje?usp=sharing" // 11.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/1qwPT0rRnS1AW42MtMU-TtBkfQZd-Vzje?usp=sharing"
             },
             { 
                 id: 12, 
@@ -255,7 +258,7 @@
                 conductor: "未提供", 
                 pianist: "未提供", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/195bJdIohjTNo919Dd6WrTpR5Ym4qxSXZ?usp=sharing" // 12.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/195bJdIohjTNo919Dd6WrTpR5Ym4qxSXZ?usp=sharing"
             },
             { 
                 id: 13, 
@@ -267,7 +270,7 @@
                 conductor: "田嘉燕", 
                 pianist: "陳崇儀", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/16jquotYfrYg40epEhwX2QFYmIXBWj0In?usp=sharing" // 13.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/16jquotYfrYg40epEhwX2QFYmIXBWj0In?usp=sharing"
             },
             { 
                 id: 14, 
@@ -279,7 +282,7 @@
                 conductor: "未提供", 
                 pianist: "未提供", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/124STB1OWUcxZs6ktSV6PuP2m1wI6bMg0?usp=sharing" // 14.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/124STB1OWUcxZs6ktSV6PuP2m1wI6bMg0?usp=sharing"
             },
             { 
                 id: 15, 
@@ -291,7 +294,7 @@
                 conductor: "未提供", 
                 pianist: "未提供", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/16ckCPOIjU13dieYeMfJh9pyw-yOieet6?usp=sharing" // 15.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/16ckCPOIjU13dieYeMfJh9pyw-yOieet6?usp=sharing"
             },
             { 
                 id: 16, 
@@ -303,7 +306,7 @@
                 conductor: "未提供", 
                 pianist: "未提供", 
                 status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/16hpvaUw1zW1R20vYKnItiY86Yqx7rXlT?usp=sharing" // 16.請替換引號內的網址
+                driveUrl: "https://drive.google.com/drive/folders/16hpvaUw1zW1R20vYKnItiY86Yqx7rXlT?usp=sharing"
             }
         ];
 
@@ -390,6 +393,22 @@
                         </div>
                     </div>
 
+                    <!-- 📝 各詩班資料表單連結 -->
+                    <div class="bg-amber-50/75 border border-amber-200 p-4 rounded-2xl text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
+                                <span class="text-sm">📝</span>
+                            </div>
+                            <div>
+                                <h6 class="text-xs font-black text-amber-950">16大詩班基本資料及名冊填寫</h6>
+                                <p class="text-[10px] text-amber-800 leading-normal font-bold">請各詩班負責人在此雲端資料夾中，下載並填寫貴單位的幹部與團員名冊檔案。</p>
+                            </div>
+                        </div>
+                        <a href="${choirInfoFormUrl}" target="_blank" class="w-full sm:w-auto text-center text-xs bg-amber-600 hover:bg-amber-500 text-white px-4 py-2.5 rounded-xl font-black shadow-sm transition-all shrink-0 active:scale-95">
+                            下載基本資料表 ↗
+                        </a>
+                    </div>
+
                     <!-- 幹部名冊區 -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left">
@@ -437,7 +456,7 @@
                     ` : `
                         <div class="w-full md:w-auto flex items-center justify-center gap-3 bg-rose-50 border border-rose-100 px-8 py-3.5 rounded-2xl shrink-0 shadow-sm animate-bounce">
                             <span class="text-rose-500 text-3xl animate-pulse">❤️</span>
-                            <span class="text-sm font-black text-rose-700 tracking-wider">感謝主！願主紀念帶領。</span>
+                            <span class="text-sm font-black text-rose-700 tracking-wider">感謝主！資料已就緒</span>
                         </div>
                     `}
                 </div>
