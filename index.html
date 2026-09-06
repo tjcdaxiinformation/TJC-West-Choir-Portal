@@ -3,103 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TJC 西區音樂會 - 16大詩班影像收集系統</title>
+    <title>TJC 西區音樂會 - 16大詩班影像收集與數據統計系統</title>
     
     <!-- 載入 Tailwind CSS (極速排版引擎) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; margin: 0; }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         .rendering-pixelated { image-rendering: pixelated; }
+        .stat-card-glow { box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.08); }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col justify-between">
 
     <!-- 頂部官方導覽列 -->
-    <header class="bg-indigo-950 text-white shadow-lg shrink-0">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+    <header class="bg-indigo-950 text-white shadow-lg shrink-0 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-0.5 shadow-md shrink-0">
                     <img src="百週年.png" alt="100" class="w-full h-full object-contain" onerror="this.outerHTML='<span class=\'text-indigo-950 font-black text-xs\'>100th</span>'" />
                 </div>
                 <div>
                     <p class="text-[10px] font-black uppercase text-indigo-300 tracking-[0.2em] leading-none mb-1">TJC Western District Centennial</p>
-                    <h1 class="text-lg font-black leading-tight">西區16獻詩單位 - 影音資料收集與導覽系統</h1>
+                    <h1 class="text-base sm:text-lg font-black leading-tight">西區16獻詩單位 - 影音收集與資料統計儀表板</h1>
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-3 py-1.5 rounded-full border border-amber-500/30 font-bold">公關宣傳組 官方發布版</span>
+                <a href="#stats-dashboard" class="text-xs bg-indigo-800/80 hover:bg-indigo-700 text-indigo-100 px-3.5 py-2 rounded-xl font-bold border border-indigo-700/50 transition-colors flex items-center gap-1.5">
+                    <span>📊 數據看板</span>
+                </a>
+                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-3 py-2 rounded-xl border border-amber-500/30 font-bold hidden sm:inline-block">
+                    公關宣傳組 官方發布版
+                </span>
             </div>
         </div>
     </header>
 
     <!-- 主區塊 -->
-    <main class="max-w-7xl mx-auto w-full px-6 py-8 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        <!-- 左側：16大詩班聯絡清單 (5列寬) -->
-        <section class="lg:col-span-5 bg-white rounded-[2rem] shadow-xl border border-slate-100 flex flex-col h-[650px] overflow-hidden">
-            <div class="p-6 bg-slate-900 text-white shrink-0">
-                <h3 class="font-black text-base flex items-center gap-2">
-                    <svg class="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                    西區參獻詩班名冊 (共16大單位)
-                </h3>
-                <p class="text-[10px] text-slate-400 mt-1 font-bold">點選詩班查看幹部名單與提交影音資料</p>
-                
-                <!-- 💡 手機版貼心提醒區塊 -->
-                <div class="mt-3 bg-amber-500/20 text-amber-300 p-3 rounded-xl border border-amber-500/30 text-[10px] font-black flex items-start gap-2 leading-relaxed">
-                    <span class="text-xs shrink-0">💡</span>
-                    <span>貼心提醒：手機版請點選詩班名稱後「向下滑動」，即可看見詳細資料並點擊上傳按鈕。</span>
-                </div>
-                
-                <!-- 簡易搜尋欄 -->
-                <div class="mt-4 relative">
-                    <input id="search-input" oninput="filterChoirs()" type="text" placeholder="搜尋小區、詩班或人員..." class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-                </div>
-            </div>
+    <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 flex-grow space-y-8">
 
-            <!-- 16大詩班滾動清單 -->
-            <div id="choir-list" class="flex-grow overflow-y-auto p-4 space-y-2 custom-scrollbar bg-slate-50/50">
-                <!-- 由 JavaScript 動態生成 -->
-            </div>
-        </section>
+        <!-- 💡 首頁新增：16大詩班數據統計表看板 -->
+        <section id="stats-dashboard" class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 rounded-[2.5rem] p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden border border-indigo-800/30">
+            <!-- 背景紋理裝飾 -->
+            <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute right-1/3 -top-10 w-60 h-60 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
-        <!-- 右側：詩班詳細資訊與提交系統 (7列寬) -->
-        <section class="lg:col-span-7 flex flex-col gap-6">
-            
-            <!-- 進度追蹤器看板 -->
-            <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 grid grid-cols-3 gap-4 shrink-0">
-                <div class="text-center p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                    <div class="text-2xl font-black text-indigo-600">16</div>
-                    <div class="text-[10px] text-slate-400 font-bold uppercase mt-1">參獻總單位</div>
-                </div>
-                <div class="text-center p-3 bg-emerald-50 rounded-2xl border border-emerald-100">
-                    <div id="count-submitted" class="text-2xl font-black text-emerald-600">0</div>
-                    <div class="text-[10px] text-emerald-500 font-bold uppercase mt-1">已提交影像</div>
-                </div>
-                <div class="text-center p-3 bg-amber-50 rounded-2xl border border-amber-100">
-                    <div id="count-pending" class="text-2xl font-black text-amber-600">16</div>
-                    <div class="text-[10px] text-amber-500 font-bold uppercase mt-1">待提交單位</div>
-                </div>
-            </div>
-
-            <!-- 詳細資訊面板 -->
-            <div id="detail-panel" class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-8 flex-grow flex flex-col justify-center items-center text-center">
-                <!-- 預設提示畫面 -->
-                <div class="max-w-sm">
-                    <div class="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-                        <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
+            <div class="relative z-10 space-y-6">
+                <!-- 看板標頭 -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs font-black text-amber-400 uppercase tracking-widest mb-1">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                            <span>Real-Time Analytics Dashboard</span>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-black tracking-tight flex items-center gap-2">
+                            <span>📊 16大詩班進度與資料統計表看板</span>
+                        </h2>
                     </div>
-                    <h4 class="text-lg font-black text-slate-800">請選取獻詩單位</h4>
-                    <p class="text-xs text-slate-400 mt-3 leading-relaxed font-medium">
-                        選擇左側名冊中的詩班，即可檢視幹部編制，並取得專屬的練詩影音上傳入口。
-                    </p>
+                    <div class="flex items-center gap-2 text-xs text-indigo-200 bg-white/10 px-4 py-2 rounded-2xl border border-white/10">
+                        <span>📅 統計截止預計：115年傳台百年大會前夕</span>
+                    </div>
+                </div>
+
+                <!-- 核心 KPI 指標卡片 (4 欄格) -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white/10 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/10 hover:border-white/20 transition-all">
+                        <div class="text-[10px] font-bold text-indigo-300 uppercase tracking-wider mb-1">參獻總單位數</div>
+                        <div class="text-2xl sm:text-3xl font-black text-white flex items-baseline gap-1">
+                            <span>16</span>
+                            <span class="text-xs font-normal text-slate-300">個單位</span>
+                        </div>
+                        <div class="text-[10px] text-indigo-200 mt-2 font-medium">包含教區與4大小區</div>
+                    </div>
+
+                    <div class="bg-emerald-500/15 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-emerald-500/30 hover:border-emerald-500/50 transition-all">
+                        <div class="text-[10px] font-bold text-emerald-300 uppercase tracking-wider mb-1">練詩影音提交率</div>
+                        <div class="text-2xl sm:text-3xl font-black text-emerald-300 flex items-baseline gap-1">
+                            <span id="stat-percent">0%</span>
+                            <span class="text-xs font-normal text-emerald-200/70">(<span id="stat-submitted-count">0</span>/16)</span>
+                        </div>
+                        <div class="w-full bg-emerald-950/50 h-1.5 rounded-full overflow-hidden mt-2">
+                            <div id="stat-progress-bar" class="bg-emerald-400 h-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-500/15 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-amber-500/30 hover:border-amber-500/50 transition-all">
+                        <div class="text-[10px] font-bold text-amber-300 uppercase tracking-wider mb-1">待提交影音單位</div>
+                        <div class="text-2xl sm:text-3xl font-black text-amber-300 flex items-baseline gap-1">
+                            <span id="stat-pending-count">16</span>
+                            <span class="text-xs font-normal text-amber-200/70">個單位</span>
+                        </div>
+                        <div class="text-[10px] text-amber-200/80 mt-2 font-medium">持續催繳與輔導中</div>
+                    </div>
+
+                    <div class="bg-indigo-500/15 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-indigo-500/30 hover:border-indigo-500/50 transition-all">
+                        <div class="text-[10px] font-bold text-indigo-200 uppercase tracking-wider mb-1">幹部名冊填寫完整度</div>
+                        <div class="text-2xl sm:text-3xl font-black text-indigo-200 flex items-baseline gap-1">
+                            <span id="stat-cadre-rate">62%</span>
+                        </div>
+                        <div class="text-[10px] text-indigo-300 mt-2 font-medium flex items-center justify-between">
+                            <span>指揮: <b id="stat-conductor-count" class="text-white">10</b></span>
+                            <span>伴奏: <b id="stat-pianist-count" class="text-white">10</b></span>
+                            <span>負責人: <b id="stat-leader-count" class="text-white">8</b></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 各小區詳細數據統計明細表 -->
+                <div class="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10 overflow-hidden">
+                    <h3 class="text-xs font-black text-indigo-200 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <span>🏛️ 各小區參獻單位提交統計表</span>
+                    </h3>
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="border-b border-white/10 text-indigo-300 text-[10px] uppercase font-bold">
+                                    <th class="py-2 px-3">轄區分類</th>
+                                    <th class="py-2 px-3">參獻總單位數</th>
+                                    <th class="py-2 px-3">已上傳影音</th>
+                                    <th class="py-2 px-3">待上傳影音</th>
+                                    <th class="py-2 px-3 min-w-[140px]">小區完成率進度條</th>
+                                </tr>
+                            </thead>
+                            <tbody id="zone-stats-tbody" class="divide-y divide-white/5 font-medium text-slate-200">
+                                <!-- 由 JS 動態繪製小區統計列 -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- 兩欄式主要功能區 (左：名冊 / 右：詳細資訊) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 左側：16大詩班聯絡清單 (5列寬) -->
+            <section class="lg:col-span-5 bg-white rounded-[2rem] shadow-xl border border-slate-100 flex flex-col h-[650px] overflow-hidden">
+                <div class="p-6 bg-slate-900 text-white shrink-0">
+                    <h3 class="font-black text-base flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        西區參獻詩班名冊 (共16大單位)
+                    </h3>
+                    <p class="text-[10px] text-slate-400 mt-1 font-bold">點選詩班查看幹部名單與提交影音資料</p>
+                    
+                    <!-- 💡 手機版貼心提醒區塊 -->
+                    <div class="mt-3 bg-amber-500/20 text-amber-300 p-3 rounded-xl border border-amber-500/30 text-[10px] font-black flex items-start gap-2 leading-relaxed">
+                        <span class="text-xs shrink-0">💡</span>
+                        <span>貼心提醒：手機版點選詩班名稱後「向下滑動」，即可看見詳細資料與專屬上傳入口。</span>
+                    </div>
+                    
+                    <!-- 簡易搜尋欄 -->
+                    <div class="mt-4 relative">
+                        <input id="search-input" oninput="filterChoirs()" type="text" placeholder="搜尋小區、詩班或人員..." class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                </div>
+
+                <!-- 16大詩班滾動清單 -->
+                <div id="choir-list" class="flex-grow overflow-y-auto p-4 space-y-2 custom-scrollbar bg-slate-50/50">
+                    <!-- 由 JavaScript 動態生成 -->
+                </div>
+            </section>
+
+            <!-- 右側：詩班詳細資訊與提交系統 (7列寬) -->
+            <section class="lg:col-span-7 flex flex-col gap-6">
+                
+                <!-- 進度追蹤器看板 -->
+                <div class="bg-white p-6 rounded-3xl shadow-md border border-slate-100 grid grid-cols-3 gap-4 shrink-0">
+                    <div class="text-center p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="text-2xl font-black text-indigo-600">16</div>
+                        <div class="text-[10px] text-slate-400 font-bold uppercase mt-1">參獻總單位</div>
+                    </div>
+                    <div class="text-center p-3 bg-emerald-50 rounded-2xl border border-emerald-100">
+                        <div id="count-submitted" class="text-2xl font-black text-emerald-600">0</div>
+                        <div class="text-[10px] text-emerald-500 font-bold uppercase mt-1">已提交影像</div>
+                    </div>
+                    <div class="text-center p-3 bg-amber-50 rounded-2xl border border-amber-100">
+                        <div id="count-pending" class="text-2xl font-black text-amber-600">16</div>
+                        <div class="text-[10px] text-amber-500 font-bold uppercase mt-1">待提交單位</div>
+                    </div>
+                </div>
+
+                <!-- 詳細資訊面板 -->
+                <div id="detail-panel" class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-8 flex-grow flex flex-col justify-center items-center text-center">
+                    <!-- 預設提示畫面 -->
+                    <div class="max-w-sm">
+                        <div class="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                            <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
+                        </div>
+                        <h4 class="text-lg font-black text-slate-800">請選取獻詩單位</h4>
+                        <p class="text-xs text-slate-400 mt-3 leading-relaxed font-medium">
+                            選擇左側名冊中的詩班，即可檢視幹部編制，並取得專屬的練詩影音上傳入口。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
 
     </main>
 
@@ -112,208 +216,29 @@
         </a>
     </footer>
 
-    <!-- JavaScript 核心控制 -->
+    <!-- JavaScript 核心控制與數據庫 -->
     <script>
-        // 雲端硬碟主資料夾ID (備用)
-        const mainDriveFolder = "16u1TIeRSwUBAQNIKQIAw3FKt0P6QiWja";
-
         // 各詩班基本資料下載與填寫的統一雲端硬碟連結
         const choirInfoFormUrl = "https://drive.google.com/drive/folders/1clXLMuRrvif3D6AoPlIug-n3p1_EeUf3?usp=sharing";
 
-        // 16大詩班完整數據庫 - 【已置入您提供的最新真實雲端硬碟路徑】
+        // 16大詩班完整數據庫 - 【包含真實雲端硬碟分流路徑】
         const choirs = [
-            { 
-                id: 1, 
-                zone: "復興小區", 
-                note: "前山牧區", 
-                name: "復興小區前山聯合詩班", 
-                leader: "林茜葦", 
-                email: "saum0523@gmail.com", 
-                conductor: "王鴻志", 
-                pianist: "陳 箴 / 孔思恩", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/15m2Jkaiq9724uE2TdgFD_ft-wVnMF_Cn?usp=sharing"
-            },
-            { 
-                id: 2, 
-                zone: "復興小區", 
-                note: "中山牧區", 
-                name: "復興小區中山聯合兒童詩班", 
-                leader: "胡燕琳", 
-                email: "", 
-                conductor: "胡燕琳", 
-                pianist: "陳齊揚", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1jCTUDvbH4ni0nooed0vmQMzYfele23HG?usp=sharing"
-            },
-            { 
-                id: 3, 
-                zone: "復興小區", 
-                note: "後山牧區", 
-                name: "復興小區後山職務人員聯合詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "田恩惠", 
-                pianist: "林月霞", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1fCrnnbYGg_fmyPatoKeA1N2jkgrliq__?usp=sharing"
-            },
-            { 
-                id: 4, 
-                zone: "竹苗小區", 
-                note: "尖石前山", 
-                name: "尖石前山聯合詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "徐慈敏", 
-                pianist: "徐 臻", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1dPdl-hkTDLwt36So7p4uQiq9CrSHQD01?usp=sharing"
-            },
-            { 
-                id: 5, 
-                zone: "竹苗小區", 
-                note: "尖石後山", 
-                name: "尖石後山聯合詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "未提供", 
-                pianist: "未提供", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1g283rlqGyODPX7wagWGt9ABzuI9yZJAd?usp=sharing"
-            },
-            { 
-                id: 6, 
-                zone: "竹苗小區", 
-                note: "五峰牧區", 
-                name: "五峰線綜合詩班", 
-                leader: "蘇志成", 
-                email: "", 
-                conductor: "黃欣茹", 
-                pianist: "張立揚", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1absu_8j9LC19Tbkhw_iD2IsuQSE7nvXk?usp=sharing"
-            },
-            { 
-                id: 7, 
-                zone: "竹苗小區", 
-                note: "中港溪", 
-                name: "中港溪聯合詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "未提供", 
-                pianist: "未提供", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1p3suQAVCvnGukWB7Lk91wOEJWt0Ow6F_?usp=sharing"
-            },
-            { 
-                id: 8, 
-                zone: "中苗小區", 
-                note: "東達牧區", 
-                name: "東達牧區聯合詩班", 
-                leader: "陳寧", 
-                email: "", 
-                conductor: "胡致念", 
-                pianist: "張紫芸", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1qrjiUVHrsSLmS0rhr8snFXffsYK5oHMI?usp=sharing"
-            },
-            { 
-                id: 9, 
-                zone: "中苗小區", 
-                note: "泰安牧區", 
-                name: "泰安牧區聯合詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "未提供", 
-                pianist: "未提供", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/15JmvAn2lvvi4kxg_GmUQ0fkp5Ak-JsTL?usp=sharing"
-            },
-            { 
-                id: 10, 
-                zone: "中苗小區", 
-                note: "大甲溪牧區", 
-                name: "大甲溪牧區聯合詩班", 
-                leader: "張天仁", 
-                email: "", 
-                conductor: "李子寧", 
-                pianist: "湯亞昕 / 孫榮恩", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1IyVekl7BYFCHCMLG0qqanQyxKrMJSzNd?usp=sharing"
-            },
-            { 
-                id: 11, 
-                zone: "南投小區", 
-                note: "新望愛", 
-                name: "新望愛牧區長青聯合詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "田珍寶", 
-                pianist: "何燕萍", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/1qwPT0rRnS1AW42MtMU-TtBkfQZd-Vzje?usp=sharing"
-            },
-            { 
-                id: 12, 
-                zone: "南投小區", 
-                note: "親春線", 
-                name: "親春線牧區兒童聯合詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "未提供", 
-                pianist: "未提供", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/195bJdIohjTNo919Dd6WrTpR5Ym4qxSXZ?usp=sharing"
-            },
-            { 
-                id: 13, 
-                zone: "南投小區", 
-                note: "力行線", 
-                name: "力行線牧區社青聯合詩班", 
-                leader: "楊凱琳", 
-                email: "", 
-                conductor: "田嘉燕", 
-                pianist: "陳崇儀", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/16jquotYfrYg40epEhwX2QFYmIXBWj0In?usp=sharing"
-            },
-            { 
-                id: 14, 
-                zone: "教區大專", 
-                note: "大專聯契", 
-                name: "西大團契詩班", 
-                leader: "未提供", 
-                email: "", 
-                conductor: "未提供", 
-                pianist: "未提供", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/124STB1OWUcxZs6ktSV6PuP2m1wI6bMg0?usp=sharing"
-            },
-            { 
-                id: 15, 
-                zone: "教區聯合", 
-                note: "西區教區序曲樂團", 
-                name: "西區教區序曲樂團", 
-                leader: "羅家倩", 
-                email: "", 
-                conductor: "未提供", 
-                pianist: "未提供", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/16ckCPOIjU13dieYeMfJh9pyw-yOieet6?usp=sharing"
-            },
-            { 
-                id: 16, 
-                zone: "教區傳道長職", 
-                note: "傳道長職同工", 
-                name: "西區傳道長職聯合詩班", 
-                leader: "陳木群傳道", 
-                email: "", 
-                conductor: "未提供", 
-                pianist: "未提供", 
-                status: "pending",
-                driveUrl: "https://drive.google.com/drive/folders/16hpvaUw1zW1R20vYKnItiY86Yqx7rXlT?usp=sharing"
-            }
+            { id: 1, zone: "復興小區", note: "前山牧區", name: "復興小區前山聯合詩班", leader: "林茜葦", email: "saum0523@gmail.com", conductor: "王鴻志", pianist: "陳 箴 / 孔思恩", status: "pending", driveUrl: "https://drive.google.com/drive/folders/15m2Jkaiq9724uE2TdgFD_ft-wVnMF_Cn?usp=sharing" },
+            { id: 2, zone: "復興小區", note: "中山牧區", name: "復興小區中山聯合兒童詩班", leader: "胡燕琳", email: "", conductor: "胡燕琳", pianist: "陳齊揚", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1jCTUDvbH4ni0nooed0vmQMzYfele23HG?usp=sharing" },
+            { id: 3, zone: "復興小區", note: "後山牧區", name: "復興小區後山職務人員聯合詩班", leader: "未提供", email: "", conductor: "田恩惠", pianist: "林月霞", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1fCrnnbYGg_fmyPatoKeA1N2jkgrliq__?usp=sharing" },
+            { id: 4, zone: "竹苗小區", note: "尖石前山", name: "尖石前山聯合詩班", leader: "未提供", email: "", conductor: "徐慈敏", pianist: "徐 臻", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1dPdl-hkTDLwt36So7p4uQiq9CrSHQD01?usp=sharing" },
+            { id: 5, zone: "竹苗小區", note: "尖石後山", name: "尖石後山聯合詩班", leader: "未提供", email: "", conductor: "未提供", pianist: "未提供", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1g283rlqGyODPX7wagWGt9ABzuI9yZJAd?usp=sharing" },
+            { id: 6, zone: "竹苗小區", note: "五峰牧區", name: "五峰線綜合詩班", leader: "蘇志成", email: "", conductor: "黃欣茹", pianist: "張立揚", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1absu_8j9LC19Tbkhw_iD2IsuQSE7nvXk?usp=sharing" },
+            { id: 7, zone: "竹苗小區", note: "中港溪", name: "中港溪聯合詩班", leader: "未提供", email: "", conductor: "未提供", pianist: "未提供", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1p3suQAVCvnGukWB7Lk91wOEJWt0Ow6F_?usp=sharing" },
+            { id: 8, zone: "中苗小區", note: "東達牧區", name: "東達牧區聯合詩班", leader: "陳寧", email: "", conductor: "胡致念", pianist: "張紫芸", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1qrjiUVHrsSLmS0rhr8snFXffsYK5oHMI?usp=sharing" },
+            { id: 9, zone: "中苗小區", note: "泰安牧區", name: "泰安牧區聯合詩班", leader: "未提供", email: "", conductor: "未提供", pianist: "未提供", status: "pending", driveUrl: "https://drive.google.com/drive/folders/15JmvAn2lvvi4kxg_GmUQ0fkp5Ak-JsTL?usp=sharing" },
+            { id: 10, zone: "中苗小區", note: "大甲溪牧區", name: "大甲溪牧區聯合詩班", leader: "張天仁", email: "", conductor: "李子寧", pianist: "湯亞昕 / 孫榮恩", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1IyVekl7BYFCHCMLG0qqanQyxKrMJSzNd?usp=sharing" },
+            { id: 11, zone: "南投小區", note: "新望愛", name: "新望愛牧區長青聯合詩班", leader: "未提供", email: "", conductor: "田珍寶", pianist: "何燕萍", status: "pending", driveUrl: "https://drive.google.com/drive/folders/1qwPT0rRnS1AW42MtMU-TtBkfQZd-Vzje?usp=sharing" },
+            { id: 12, zone: "南投小區", note: "親春線", name: "親春線牧區兒童聯合詩班", leader: "未提供", email: "", conductor: "未提供", pianist: "未提供", status: "pending", driveUrl: "https://drive.google.com/drive/folders/195bJdIohjTNo919Dd6WrTpR5Ym4qxSXZ?usp=sharing" },
+            { id: 13, zone: "南投小區", note: "力行線", name: "力行線牧區社青聯合詩班", leader: "楊凱琳", email: "", conductor: "田嘉燕", pianist: "陳崇儀", status: "pending", driveUrl: "https://drive.google.com/drive/folders/16jquotYfrYg40epEhwX2QFYmIXBWj0In?usp=sharing" },
+            { id: 14, zone: "教區大專", note: "大專聯契", name: "西大團契詩班", leader: "未提供", email: "", conductor: "未提供", pianist: "未提供", status: "pending", driveUrl: "https://drive.google.com/drive/folders/124STB1OWUcxZs6ktSV6PuP2m1wI6bMg0?usp=sharing" },
+            { id: 15, zone: "教區聯合", note: "西區教區序曲樂團", name: "西區教區序曲樂團", leader: "羅家倩", email: "", conductor: "未提供", pianist: "未提供", status: "pending", driveUrl: "https://drive.google.com/drive/folders/16ckCPOIjU13dieYeMfJh9pyw-yOieet6?usp=sharing" },
+            { id: 16, zone: "教區傳道長職", note: "傳道長職同工", name: "西區傳道長職聯合詩班", leader: "陳木群傳道", email: "", conductor: "未提供", pianist: "未提供", status: "pending", driveUrl: "https://drive.google.com/drive/folders/16hpvaUw1zW1R20vYKnItiY86Yqx7rXlT?usp=sharing" }
         ];
 
         let activeChoirId = null;
@@ -439,7 +364,7 @@
                                 <span class="text-[9px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">雲端分流連結已啟用</span>
                             </h5>
                             <p class="text-xs text-indigo-900/70 leading-relaxed font-bold">
-                                本系統已導向您的 Google Drive 專屬資料夾。請點擊下方按鈕或直接用手機掃描 QR Code，即可秒速直達並將檔案上傳至您的專屬雲端空間。
+                                本系統已導向您的 Google Drive 專屬資料夾。點擊下方按鈕或直接用手機掃描 QR Code，即可直達並將檔案上傳至貴單位的專屬雲端空間。
                             </p>
                         </div>
                         <div class="shrink-0 flex flex-col items-center gap-2 bg-white p-3 rounded-2xl border border-indigo-100/80 shadow-md">
@@ -461,7 +386,7 @@
                         </button>
                     ` : `
                         <div class="w-full md:w-auto flex items-center justify-center gap-3 bg-rose-50 border border-rose-100 px-8 py-3.5 rounded-2xl shrink-0 shadow-sm animate-bounce">
-                            <span class="text-rose-500 text-3xl animate-pulse">❤️</span>
+                            <span class="text-rose-500 text-2xl animate-pulse">❤️</span>
                             <span class="text-sm font-black text-rose-700 tracking-wider">感謝主！資料已就緒</span>
                         </div>
                     `}
@@ -469,33 +394,101 @@
             `;
         }
 
-        // 確認已完成上傳 (連動狀態與大愛心顯示)
+        // 確認已完成上傳 (連動狀態與全站統計看板)
         function confirmUpload(id) {
             const choir = choirs.find(c => c.id === id);
             if (choir) {
                 choir.status = 'submitted';
-                selectChoir(id); // 重新繪製詳細面板，觸發「感謝主！❤️」
-                updateStats();   // 更新進度看板件數
+                selectChoir(id); // 重新繪製詳細面板
+                updateStats();   // 即時更新頂部及首頁統計看板數據
             }
         }
 
-        // 更新頂部已提交/未提交件數
+        // 核心功能：計算並更新首頁「16大詩班數據統計表看板」
         function updateStats() {
             const submittedCount = choirs.filter(c => c.status === 'submitted').length;
             const pendingCount = choirs.length - submittedCount;
+            const percent = Math.round((submittedCount / choirs.length) * 100);
+
+            // 1. 更新各處數字
             document.getElementById('count-submitted').innerText = submittedCount;
             document.getElementById('count-pending').innerText = pendingCount;
+            document.getElementById('stat-submitted-count').innerText = submittedCount;
+            document.getElementById('stat-pending-count').innerText = pendingCount;
+            document.getElementById('stat-percent').innerText = `${percent}%`;
+            
+            const progressBar = document.getElementById('stat-progress-bar');
+            if (progressBar) progressBar.style.width = `${percent}%`;
+
+            // 2. 計算幹部登錄統計
+            const conductorCount = choirs.filter(c => c.conductor && c.conductor !== '未提供').length;
+            const pianistCount = choirs.filter(c => c.pianist && c.pianist !== '未提供').length;
+            const leaderCount = choirs.filter(c => c.leader && c.leader !== '未提供').length;
+
+            document.getElementById('stat-conductor-count').innerText = conductorCount;
+            document.getElementById('stat-pianist-count').innerText = pianistCount;
+            document.getElementById('stat-leader-count').innerText = leaderCount;
+
+            const totalCadresSlots = choirs.length * 3;
+            const filledCadresSlots = conductorCount + pianistCount + leaderCount;
+            const cadreRate = Math.round((filledCadresSlots / totalCadresSlots) * 100);
+            document.getElementById('stat-cadre-rate').innerText = `${cadreRate}%`;
+
+            // 3. 繪製小區統計明細表格
+            renderZoneStatsTable();
+        }
+
+        // 繪製小區統計數據表格
+        function renderZoneStatsTable() {
+            const tbody = document.getElementById('zone-stats-tbody');
+            if (!tbody) return;
+
+            // 彙整小區資料
+            const zoneMap = {};
+            choirs.forEach(c => {
+                let zoneKey = c.zone;
+                if (zoneKey.startsWith("教區")) zoneKey = "教區單位";
+
+                if (!zoneMap[zoneKey]) {
+                    zoneMap[zoneKey] = { total: 0, submitted: 0 };
+                }
+                zoneMap[zoneKey].total += 1;
+                if (c.status === 'submitted') {
+                    zoneMap[zoneKey].submitted += 1;
+                }
+            });
+
+            tbody.innerHTML = '';
+            Object.keys(zoneMap).forEach(zoneName => {
+                const z = zoneMap[zoneName];
+                const pending = z.total - z.submitted;
+                const zonePercent = Math.round((z.submitted / z.total) * 100);
+
+                const row = document.createElement('tr');
+                row.className = "hover:bg-white/5 transition-colors";
+                row.innerHTML = `
+                    <td class="py-2.5 px-3 font-bold flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full ${getZoneColor(zoneName)}"></span>
+                        <span>${zoneName}</span>
+                    </td>
+                    <td class="py-2.5 px-3 font-bold">${z.total} 個</td>
+                    <td class="py-2.5 px-3 font-bold text-emerald-400">${z.submitted} 個</td>
+                    <td class="py-2.5 px-3 font-bold text-amber-400">${pending} 個</td>
+                    <td class="py-2.5 px-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                <div class="bg-emerald-400 h-full transition-all duration-300" style="width: ${zonePercent}%"></div>
+                            </div>
+                            <span class="text-[10px] font-bold text-slate-300">${zonePercent}%</span>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
         }
 
         function submitDemo(url) {
             window.open(url, '_blank');
-        }
-
-        // 0秒強制解鎖
-        const loader = document.getElementById('launch-loader');
-        if (loader) {
-            loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 300);
         }
 
         // 頁面初始化渲染
